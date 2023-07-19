@@ -1,1 +1,5 @@
-PyMySQL
+Flask
+Flask_RESTful
+Requests
+SQLAlchemy
+mysqlclient

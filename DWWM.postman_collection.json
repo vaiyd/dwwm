@@ -1,0 +1,63 @@
+{
+	"info": {
+		"_postman_id": "d290abc1-ee7f-4fd9-8d51-536af8cf8b38",
+		"name": "DWWM",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11216092"
+	},
+	"item": [
+		{
+			"name": "Voiture",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5001/voiture",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5001",
+					"path": [
+						"voiture"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Voiture",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"modele\":\"PASSATE\",\r\n\"id_marque_lookup\":6}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5001/voiture",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5001",
+					"path": [
+						"voiture"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

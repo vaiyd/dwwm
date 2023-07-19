@@ -1,3 +1,19 @@
+# Python
+
+Link :
+* https://www.python.org/downloads/release/python-31012/
+* https://bootstrap.pypa.io/get-pip.py
+* https://www.sqlalchemy.org/
+* https://flask.palletsprojects.com/en/2.3.x/
+* https://flask-restful.readthedocs.io/en/latest/
+
+```bash
+#Se déplacer à la racine du projet
+python get-pip.py
+pip install -r requirements.txt
+```
+
+
 # Docker
 
 ## Installation
