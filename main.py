@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from package.Voiture import Voiture
-from orm.controller.GarageController import GarageController
+from cours1.package.Voiture import Voiture
+from cours2.orm.controller.GarageController import GarageController
 
 def main():
 
@@ -13,7 +13,7 @@ def sql_main():
     from sqlalchemy import create_engine, text
     from sqlalchemy.orm import Session
 
-    engine = create_engine("mysql://root:wordpress@uat-bdn.bmcorp.fr:3306/dwwm_orm")
+    engine = create_engine("mysql://root:wordpress@192.168.10.174:3306/dwwm")
     
     session = Session(engine)
 
@@ -25,7 +25,7 @@ def sql_main():
 
 def buildTables():
     grCtrl = GarageController()
-    grCtrl.initGarage()
+    grCtrl.init()
 
 def orm_main():
 
@@ -34,6 +34,6 @@ def orm_main():
 
 if __name__ == '__main__':
 
-    main()
-    #sql_main()
-    #orm_main()
+    #main()
+    sql_main()
+    #buildTables()

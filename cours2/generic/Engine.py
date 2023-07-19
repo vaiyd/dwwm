@@ -9,15 +9,14 @@ from sqlalchemy.orm import Session
 # Classe Engine pour la gestion de la base de données
 class Engine(object):
 
-    # Construction de l'objet Engine qui gère la connexion à la base de données
-    def __init__(self, type='mysql', user='wordpress', mdp='wordpress', sever='uat-bdn.bmcorp.fr', port='3306', database='cours'):
-        # Crée une instance de "engine" qui établit la connexion à la base de données
+    def __init__(self, type, user, mdp, sever, port, database):
+        
         self.engine = create_engine(f"{type}://{user}:{mdp}@{sever}:{port}/{database}")
-        # Crée une session qui sera utilisée pour interagir avec la base de données
         self.session = Session(self.engine)
 
     # Fonction qui initialise la base de données
     def initializer(self, objClass = None, asTable=True):
+
         obj = objClass  # Instanciation de la classe passée en paramètre
         inspected = sql_inspect(self.engine) # Instanciation de l'inspecteur du SGBDR
         if(obj):
@@ -26,19 +25,16 @@ class Engine(object):
             if not asTable: # Si la table n'existe pas
                 obj.__table__.create(self.engine)  # Création de la table dans la base de données
 
-
-
-    
-    def selectAllObject(self, obj):
+    def selectObjects(self, obj):
         res = self.session.query(obj).all()  # Exécution de la requête et récupération des résultats
         return res  # Retour des résultats
     
-    def selectAllObject(self, obj):
-        res = self.session.query(obj).all()  # Exécution de la requête et récupération des résultats
-        return res  # Retour des résultats
+    def selectObjectById(self, obj, id):
+        res = self.session.query(obj).filter_by(id=id).first() # Exécution de la requête et récupération d'un resultat unique
+        return res  # Retour de l'objet récupéré
     
-        # Fonction qui insère un nouvel utilisateur dans la base de données
-    def insertUser(self, obj):
+    # Fonction qui insère un nouvel utilisateur dans la base de données
+    def addObject(self, obj):
         bReturn = False  # Valeur par défaut de la variable de retour
         try:
             bReturn = True

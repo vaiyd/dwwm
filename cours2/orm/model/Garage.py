@@ -9,6 +9,9 @@ class MarqueLookup(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     label = Column(String(50), nullable=False)
 
+    def to_dict(self):
+        return {'id': self.id, 'label': self.label}
+
 class Roue(Base):
     __tablename__ = 'roue'
     id = Column(Integer, primary_key=True, autoincrement=True)
@@ -17,13 +20,17 @@ class Roue(Base):
     type = Column(String(100))
     position = Column(String(50), nullable=False)
 
-    voitures = relationship("Voiture", secondary='voiture_roue')
+    #voitures = relationship("Voiture", secondary='voiture_roue')
+
+    def to_dict(self):
+        return {'id': self.id, 'marque': self.marque, 'diametre': self.diametre, 'type': self.type, 'position': self.position}
 
 class Vehicule(Base):
     __abstract__ = True
     id = Column(Integer, primary_key=True, autoincrement=True)
     modele = Column(String(100))
     annee_fabrication = Column(Integer)
+    
 
 class Voiture(Vehicule):
     __tablename__ = 'voiture'
@@ -35,11 +42,19 @@ class Voiture(Vehicule):
 
     roues = relationship("Roue", secondary='voiture_roue')
 
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'modele': self.modele,
+            'annee_fabrication': self.annee_fabrication,
+            'nb_porte': self.nb_porte,
+            'marque': self.marque.to_dict() if self.marque != None else None,
+            'roues': [roue.to_dict() for roue in self.roues]
+        }
+
 class VoitureRoue(Base):
     __tablename__ = 'voiture_roue'
+    
     id_voiture = Column(Integer,  ForeignKey('voiture.id'), primary_key=True)
     id_roue = Column(Integer, ForeignKey('roue.id'), primary_key=True)
-    date_installation = Column(Date, nullable=False)
-
-    voiture = relationship('Voiture', backref=backref('roues'))
-    roue = relationship('Roue', backref=backref('voitures'))
+    date_installation = Column(Date)
