@@ -39,7 +39,7 @@ Installation of portainer with docker and create volume to save portainer custom
 
 ```bash
 docker volume create portainer_data
-docker run -d --name trustia-portainer --restart=always -p 8000:8000 -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer
+docker run -d --name epsi-portainer --restart=always -p 8000:8000 -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer
 ```
 
 [OPTIONNEL], only to connect external docker to you're portainer
@@ -57,5 +57,5 @@ curl http://localhost:2375/images/json
 Go to portainer (https://localhost:9000)
 Environnements -> Add new -> Docker -> Start Wizard
 Choose Api, configuration exemple  :
-* Name = docker-trustia
+* Name = docker-epsi
 * URL = 192.168.X.X:2375
