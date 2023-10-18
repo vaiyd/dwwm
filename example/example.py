@@ -28,9 +28,6 @@ def main():
     del dict_data["mess2"]
     print(dict_data)'''
 
-
-
-
     '''i=0
     run = True
     while run:
@@ -38,7 +35,6 @@ def main():
         
         if(i == 10):
             run = False'''
-
 
 if __name__ == '__main__':
     main()
