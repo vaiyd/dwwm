@@ -1,0 +1,6 @@
+git clone https://github.com/vaiyd/dwwm
+git pull
+
+git add .
+git commit -m"mon message"
+git push
