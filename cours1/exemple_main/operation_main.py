@@ -43,7 +43,7 @@ def while_exemple(i = 10):
 
 # Fonction qui essaie de diviser a par b (a est 1.0 par défaut et b est 0 par défaut) et gère l'erreur de division par zéro
 def try_exemple(a=1.0, b=0):
-
+    #https://docs.python.org/3/library/exceptions.html
     try :
         # Affiche "Start Division"
         print("Start Division")
