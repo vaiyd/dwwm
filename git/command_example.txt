@@ -4,3 +4,21 @@ git pull
 git add .
 git commit -m"mon message"
 git push
+
+Test de développeur :
+    IST = Interne System Test -> test du développeur
+    Test Statique = pas execution = Pychecker -> SonarQube
+    Unit Test = execution de code = Ecrire des procédures et fonctions qui vérifient que notre code fonctionne bien
+
+Test de recette :
+    Cas de test = PV de recette a passer -> Selenium (automatisé)
+    UAT = User Acceptance Test -> utilisateur clé -> bug métier = bug fonctionnalité
+
+Test préproduction :
+    Instance ISO production sur laquelle nous déroulons tous nos tests
+
+Test production :
+    canarii -> une poignée d'utlisateur
+    bleu/vert -> petit à petit 1 instance après l'autre 
+
+
