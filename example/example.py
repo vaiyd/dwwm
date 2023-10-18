@@ -31,14 +31,13 @@ def main():
 
 
 
-    i=0
+    '''i=0
     run = True
     while run:
         i = 1 + 1
         
         if(i == 10):
-            run = False
-
+            run = False'''
 
 
 if __name__ == '__main__':
