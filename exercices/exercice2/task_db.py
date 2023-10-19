@@ -16,7 +16,7 @@ Exercice 2 : Gestionnaire de tâches avec une base de données
     Supprimer une tâche
 '''
 
-from sqlalchemy import create_engine, Column, Integer, String, Text, Boolean
+from sqlalchemy import text, create_engine, Column, Integer, String, Text, Boolean
 from sqlalchemy.orm import Session, declarative_base
 
 Base = declarative_base()
@@ -78,6 +78,10 @@ def main():
     Base.metadata.create_all(engine)
 
     session = Session(engine)
+    
+    req = text("""SELECT * FROM task""")
+    res = session.execute(req).all()
+    print(res)
 
     #create_task(session=session, title="titre2", description="dc2")
 
@@ -91,7 +95,7 @@ def main():
 
     #delete_task(session=session, id=1)
 
-    create_task(session=session, title="titre4", description="dc4")
+    #create_task(session=session, title="titre4", description="dc4")
 
 if __name__ == '__main__':
     main()
