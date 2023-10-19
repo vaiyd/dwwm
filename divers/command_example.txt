@@ -15,10 +15,13 @@ Test de recette :
     UAT = User Acceptance Test -> utilisateur clé -> bug métier = bug fonctionnalité
 
 Test préproduction :
-    Instance ISO production sur laquelle nous déroulons tous nos tests
+    Instance ISO production sur laquelle nous déroulons tous nos tests (développeur et recette)
 
 Test production :
-    canarii -> une poignée d'utlisateur
+
+    Chaque type de déploiement ci-dessous doit redéployer tous les tests précédant (développeur et recette)
+
+    canari -> une poignée d'utlisateurs puis une autre etc jusqu'à déploiement complet
     bleu/vert -> petit à petit 1 instance après l'autre 
 
 
