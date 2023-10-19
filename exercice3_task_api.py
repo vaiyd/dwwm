@@ -14,7 +14,7 @@ PUT pour mettre à jour une tâche, et DELETE pour supprimer une tâche).
 4. Chaque route doit interagir avec la base de données, effectuant l'opération
 correspondante en fonction de la requête reçue.
 
-5. Verfier votre API en utilisant un outil comme curl ou Postman pour 
+5. Verifier votre API en utilisant un outil comme curl ou Postman ou requests pour 
 envoyer des requêtes à votre application et observer les réponses.
 
 '''

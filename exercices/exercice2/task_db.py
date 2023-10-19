@@ -32,6 +32,10 @@ class Task(Base):
     def __repr__(self):
         return (f"id :: {self.id} ; title :: {self.title} ; description :: {self.description} ; completed :: {self.completed}")
 
+    def to_dict(self):
+        return ({"id":self.id, "title":self.title,
+                 "description":self.description, "completed":self.completed})
+
 def session_commit(session):
     try:
         session.commit()
@@ -85,9 +89,9 @@ def main():
 
     #update_task(session=session, id=1, completed=True)
 
-    delete_task(session=session, id=1)
+    #delete_task(session=session, id=1)
 
-    create_task(session=session, title="titre3", description="dc3")
+    create_task(session=session, title="titre4", description="dc4")
 
 if __name__ == '__main__':
     main()
