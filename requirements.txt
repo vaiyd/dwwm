@@ -1,5 +1,5 @@
 Flask
 Flask_RESTful
-Requests
+requests
 SQLAlchemy
 mysqlclient

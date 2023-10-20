@@ -24,7 +24,7 @@ class GenericResource(Resource):
         if(request.form != {}):
             args = request.form
             new_dict = args.to_dict()
-        if(request.json != {}):
+        elif(request.json != {}):
             new_dict = request.json
 
         return new_dict
