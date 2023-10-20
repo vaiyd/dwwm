@@ -4,7 +4,8 @@ Exercice 2 : Gestionnaire de tâches avec une base de données
  
 1. Installez SQLAlchemy si vous ne l'avez pas déjà fait.
 2. Créez un fichier SQLite tasks.db.
-3. Définissez une classe Task avec SQLAlchemy qui représente les éléments de votre liste de tâches. Chaque tâche doit avoir les attributs suivants :
+3. Définissez une classe Task avec SQLAlchemy qui représente les éléments de votre 
+    liste de tâches. Chaque tâche doit avoir les attributs suivants :
     ID (clé primaire)
     Title (titre de la tâche)
     Description (description de la tâche)
@@ -29,9 +30,9 @@ class Task(Base):
     description = Column(Text)
     completed = Column(Boolean, default=False)
 
-    def __repr__(self):
+    '''def __repr__(self):
         return (f"id :: {self.id} ; title :: {self.title} ; description :: {self.description} ; completed :: {self.completed}")
-
+    '''
     def to_dict(self):
         return ({"id":self.id, "title":self.title,
                  "description":self.description, "completed":self.completed})

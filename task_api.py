@@ -53,7 +53,6 @@ class TaskListResource(GenericResource):
         Permet d'afficher une liste de tâches
         Args:
             self : la classe TaskListResource
-
         Return:
             final_tasks : list : toutes les tâches
         """
@@ -94,8 +93,21 @@ class TaskListResource(GenericResource):
 
 class TaskResource(GenericResource):
     """
-    CRUD sur une tâches unitaire (openapi)
+    Gestion des opérations API qui concernent une tâche spécifique.
+
+    Cette classe gère les requêtes HTTP destinées aux tâches individuelles, permettant 
+    de récupérer, mettre à jour, ou supprimer des tâches spécifiques par leur identifiant.
+
+    Méthodes
+    --------
+    get(task_id: int):
+        Récupère une tâche par son identifiant unique.
+    put(task_id: int):
+        Met à jour une tâche spécifique par son identifiant, avec les nouvelles données fournies.
+    delete(task_id: int):
+        Supprime une tâche spécifique de la base de données par son identifiant.
     """
+    
     def get(self, task_id):
         """
         Récupère une tâche par son id
