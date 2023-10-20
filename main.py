@@ -13,7 +13,7 @@ def sql_main():
     from sqlalchemy import create_engine, text
     from sqlalchemy.orm import Session
 
-    engine = create_engine("mysql://****:****@192.168.10.174:3306/dwwm")
+    engine = create_engine("mysql://<user>:<pass>@192.168.10.174:3306/dwwm")
     session = Session(engine)
 
     req = text("""SELECT * FROM marque_lookup""")
