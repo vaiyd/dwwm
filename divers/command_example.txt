@@ -5,6 +5,8 @@ git add .
 git commit -m"mon message"
 git push
 
+Test statique = pip install pylint
+
 Test de développeur :
     IST = Interne System Test -> test du développeur
     Test Statique = pas execution = Pychecker -> SonarQube
