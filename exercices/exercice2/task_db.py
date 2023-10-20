@@ -51,8 +51,8 @@ def get_all_tasks(session):
     tasks = session.query(Task).all()
     return tasks
 
-def create_task(session, title, description):
-    new_task = Task(title=title, description=description)
+def create_task(session, **kwargs):
+    new_task = Task(**kwargs)
     session.add(new_task)
     session_commit(session=session)
 

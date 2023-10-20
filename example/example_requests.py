@@ -10,7 +10,7 @@ def get():
 
 def post():
     res = requests.post(url="http://127.0.0.1:5001/tasks",
-                        json={"title":"title6", "description":"dc6"})
+                        json={"title":"title7", "description":"dc7"})
     dict_res = res.json()
     print(dict_res)
 
