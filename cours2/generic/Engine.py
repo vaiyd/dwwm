@@ -10,36 +10,36 @@ from sqlalchemy.orm import Session
 class Engine(object):
 
     def __init__(self, type, user, mdp, sever, port, database):
-        
+
         self.engine = create_engine(f"{type}://{user}:{mdp}@{sever}:{port}/{database}")
         self.session = Session(self.engine)
 
     # Fonction qui initialise la base de données
-    def initializer(self, objClass = None, asTable=True):
+    def initializer(self, obj_class = None, as_table=True):
 
-        obj = objClass  # Instanciation de la classe passée en paramètre
+        obj = obj_class  # Instanciation de la classe passée en paramètre
         inspected = sql_inspect(self.engine) # Instanciation de l'inspecteur du SGBDR
-        if(obj):
+        if obj:
             if not inspected.has_table(obj.__tablename__): # Si la table n'existe pas dans la base de données
-                asTable = False  
-            if not asTable: # Si la table n'existe pas
+                as_table = False
+            if not as_table: # Si la table n'existe pas
                 obj.__table__.create(self.engine)  # Création de la table dans la base de données
 
-    def selectObjects(self, obj):
+    def select_objects(self, obj):
         res = self.session.query(obj).all()  # Exécution de la requête et récupération des résultats
         return res  # Retour des résultats
-    
-    def selectObjectById(self, obj, id):
-        res = self.session.query(obj).filter_by(id=id).first() # Exécution de la requête et récupération d'un resultat unique
+
+    def selectObjectById(self, obj, obj_id):
+        res = self.session.query(obj).filter_by(id=obj_id).first() # Exécution de la requête et récup un resultat unique
         return res  # Retour de l'objet récupéré
-    
+
     # Fonction qui insère un nouvel utilisateur dans la base de données
     def addObject(self, obj):
-        bReturn = False  # Valeur par défaut de la variable de retour
+        b_return = False  # Valeur par défaut de la variable de retour
         try:
-            bReturn = True
+            b_return = True
             self.session.add(obj)  # Ajout du nouvel utilisateur à la session
             self.session.commit()  # Validation des changements dans la base de données
-        except:
-            print("Error during insertion")  # Gestion des erreurs lors de l'insertion
-        return bReturn  # Retour du succès ou de l'échec de l'opération
+        except Exception as e:
+            print(f"Error during insertion :: {e}")  # Gestion des erreurs lors de l'insertion
+        return b_return  # Retour du succès ou de l'échec de l'opération

@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String, ForeignKey, Date
-from sqlalchemy.orm import relationship, backref
+from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
@@ -30,7 +30,7 @@ class Vehicule(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     modele = Column(String(100))
     annee_fabrication = Column(Integer)
-    
+ 
 
 class Voiture(Vehicule):
     __tablename__ = 'voiture'

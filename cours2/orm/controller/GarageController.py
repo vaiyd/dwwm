@@ -17,7 +17,7 @@ class GarageController(object):
     def selectVoitures(self):
         res = []
         # Utilisation de l'Engine ORM pour sélectionner tous les objets Voiture
-        res = self.orm.selectObjects(Voiture)
+        res = self.orm.select_objects(Voiture)
         # Retourne les résultats de la sélection
         return res
 
@@ -25,7 +25,7 @@ class GarageController(object):
     def selectVoituresRoues(self):
         res = []
         # Utilisation de l'Engine ORM pour sélectionner tous les objets VoitureRoue
-        res = self.orm.selectObjects(VoitureRoue)
+        res = self.orm.select_objects(VoitureRoue)
         # Retourne les résultats de la sélection
         return res
 
@@ -33,7 +33,7 @@ class GarageController(object):
     def selectMarques(self):
         res = []
         # Utilisation de l'Engine ORM pour sélectionner tous les objets MarqueLookup
-        res = self.orm.selectObjects(MarqueLookup)
+        res = self.orm.select_objects(MarqueLookup)
         # Retourne les résultats de la sélection
         return res
 
