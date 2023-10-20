@@ -30,9 +30,9 @@ class Task(Base):
     description = Column(Text)
     completed = Column(Boolean, default=False)
 
-    '''def __repr__(self):
+    def __repr__(self):
         return (f"id :: {self.id} ; title :: {self.title} ; description :: {self.description} ; completed :: {self.completed}")
-    '''
+    
     def to_dict(self):
         return ({"id":self.id, "title":self.title,
                  "description":self.description, "completed":self.completed})
