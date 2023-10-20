@@ -8,7 +8,7 @@ Exercice 3 : Gestionnaire de tâches avec une base de données et une API permet
 2. Créez un nouveau fichier pour votre application Flask.
 
 3. Configurez une API avec Flask-RESTful et créez des routes qui correspondent aux opérations CRUD que nous
-avons définies précédemment (par exemple, GET pour récupérer les tâches, POST pour créer une nouvelle tâche,
+avons définies précédemment (par exemple, GET pour récupérer toutes les tâches, POST pour créer une nouvelle tâche,
 PUT pour mettre à jour une tâche, et DELETE pour supprimer une tâche).
 
 4. Chaque route doit interagir avec la base de données, effectuant l'opération
@@ -45,28 +45,51 @@ DELETE = envoi de formulaire -> suppression
 
 '''
 
-class TaskResource(GenericResource):
+class TaskListResource(GenericResource):
     def get(self):
-        
         final_tasks = []
+        final_tasks = self.rebuild_tasks(final_tasks=final_tasks)
+
+        return final_tasks
+    
+    def post(self):
+        final_tasks = []
+        data = self.rebuild_params()
+        create_task(session=session, **data)
+        final_tasks = self.rebuild_tasks(final_tasks=final_tasks)
+
+        return final_tasks
+
+    def rebuild_tasks(self, final_tasks):
         tasks = get_all_tasks(session=session)
 
         for task in tasks:
             final_tasks.append(task.to_dict())
 
         return final_tasks
+
+class TaskResource(GenericResource):
+    def get(self, task_id):
+        task = get_task_from_id(session=session, id=task_id)
+        if(task == None):
+            return {"message":"Tâche non trouvée"}, 400
+        return task.to_dict()
     
-    def post(self):
+    def put(self, task_id):
         data = self.rebuild_params()
-        return jsonify(data)
-    
-    def put(self):
-        pass
+        task = update_task(session=session, id=task_id, **data)
+        if(not task):
+            return {"message":"Tâche non trouvée"}, 400
+        return task.to_dict()
 
-    def delete(self):
-        pass
+    def delete(self, task_id):
+        delete_id = delete_task(session=session, id=task_id)
+        if(not delete_id):
+            return {"message":"Problème de suppression"}, 400
+        return {"message":f"Tâche {delete_id} supprimée"}
 
-api.add_resource(TaskResource, '/task')
+api.add_resource(TaskListResource, '/tasks')
+api.add_resource(TaskResource, '/tasks/<int:task_id>')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port='5001', debug=True)

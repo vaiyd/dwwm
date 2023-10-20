@@ -9,22 +9,25 @@ def get():
     print(dict_res)
 
 def post():
-    res = requests.post(url="http://127.0.0.1:5001/", json={"title":"title5"})
+    res = requests.post(url="http://127.0.0.1:5001/tasks",
+                        json={"title":"title6", "description":"dc6"})
     dict_res = res.json()
     print(dict_res)
 
 def put():
-    res = requests.put(url="http://127.0.0.1:5001/", json={})
+    res = requests.put(url="http://127.0.0.1:5001/tasks/5",
+                        json={"completed":True,
+                              "description":"description5"})
     dict_res = res.json()
     print(dict_res)
 
 def delete():
-    res = requests.delete(url="http://127.0.0.1:5001/",json={})
+    res = requests.delete(url="http://127.0.0.1:5001/tasks/5")
     dict_res = res.json()
     print(dict_res)
 
 def main():
-    pass
+    post()
 
 if __name__ == '__main__':
     main()

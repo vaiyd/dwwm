@@ -56,21 +56,28 @@ def create_task(session, title, description):
     session.add(new_task)
     session_commit(session=session)
 
-def update_task(session, id, completed):
+def update_task(session, id, title=None,description=None, completed=None):
     task = get_task_from_id(session=session, id=id)
     if(task != None):
-        task.completed = completed
+        if(title != None):
+            task.title = title
+        if(completed != None):
+            task.completed = completed
+        if(description != None):
+            task.description = description
         session_commit(session=session)
+        return task
     else:
-        print("Mise à jour impossible")
+        return False
 
 def delete_task(session, id):
     task = get_task_from_id(session=session, id=id)
     if(task != None):
         session.delete(task)
         session_commit(session=session)
+        return id
     else:
-        print("Suppression impossible")
+        return False
 
 def main():
 
