@@ -2,19 +2,17 @@
 
 import json
 
-class class1:
-
+class Class1:
     def __init__(self, nom="nom1", description="description1"):
         self.nom = nom
         self.description = description
-
+        self.completed = False
 
 def main():
-
-    c = class1()
+    c = Class1() 
     #print(c.nom)
     c_dict = c.__dict__
-    #print(c_dict)
+    print(c_dict)
     #print(json.dumps(c_dict))
 
     '''for key, value in i.items() :

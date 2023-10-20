@@ -1,6 +1,7 @@
 python -m pip install flask
 python -m pip install Flask-RESTful
 python -m pip install SQLAlchemy
+python -m pip install pylint
 python -m pip list 
 python -m flask --version
 python task_api.py

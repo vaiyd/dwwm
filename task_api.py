@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
+#pylint: disable=line-too-long
 '''
-
 Exercice 3 : Gestionnaire de tâches avec une base de données et une API permettant l'accès
 
 1. Installez Flask et Flask-RESTful si vous ne l'avez pas déjà fait.
@@ -14,18 +14,18 @@ PUT pour mettre à jour une tâche, et DELETE pour supprimer une tâche).
 4. Chaque route doit interagir avec la base de données, effectuant l'opération
 correspondante en fonction de la requête reçue.
 
-5. Verifier votre API en utilisant un outil comme curl ou Postman ou requests pour 
+5. Verifier votre API en utilisant un outil comme curl ou Postman ou requests pour
 envoyer des requêtes à votre application et observer les réponses.
 
 '''
+#pylint: enable=line-too-long
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session, declarative_base
-from exercices.exercice2.task_db import get_all_tasks, get_task_from_id, create_task, update_task, delete_task
-
-from flask import Flask, request, jsonify
+from flask import Flask
 from flask_restful import Api
 from cours2.generic.GenericResource import GenericResource
+from exercices.exercice2.task_db import create_task, get_all_tasks, get_task_from_id, update_task, delete_task
 
 Base = declarative_base()
 
@@ -42,17 +42,33 @@ GET = selection/lecture
 POST = envoi de formulaire -> insertion
 PUT = envoi de formulaire -> mise à jour
 DELETE = envoi de formulaire -> suppression
-
 '''
 
 class TaskListResource(GenericResource):
+    """
+    Permet d'afficher une liste de tâches et d'en créer
+    """
     def get(self):
+        """
+        Permet d'afficher une liste de tâches
+        Args:
+            self : la classe TaskListResource
+
+        Return:
+            final_tasks : list : toutes les tâches
+        """
         final_tasks = []
         final_tasks = self.rebuild_tasks(final_tasks=final_tasks)
-
         return final_tasks
-    
+
     def post(self):
+        """
+        Permet de créer des tâches
+        Args:
+            self : la classe TaskListResource
+        Return:
+            list : toutes les tâches
+        """
         final_tasks = []
         data = self.rebuild_params()
         create_task(session=session, **data)
@@ -61,6 +77,14 @@ class TaskListResource(GenericResource):
         return final_tasks
 
     def rebuild_tasks(self, final_tasks):
+        """
+        Recontruit les objets tâche en list de dictionnaire
+        Args:
+            self : la classe TaskListResource
+            final_tasks : list : liste de tâches
+        Return:
+            final_tasks : list : toutes les tâches au format dict
+        """
         tasks = get_all_tasks(session=session)
 
         for task in tasks:
@@ -69,22 +93,51 @@ class TaskListResource(GenericResource):
         return final_tasks
 
 class TaskResource(GenericResource):
+    """
+    CRUD sur une tâches unitaire (openapi)
+    """
     def get(self, task_id):
+        """
+        Récupère une tâche par son id
+        Args:
+            self : la classe TaskResource
+            task_id : int : l'id de la tâche
+        Return:
+            task : dict : une tâche formatté en dictionnaire
+        """
         task = get_task_from_id(session=session, id=task_id)
-        if(task == None):
+        if task is None:
             return {"message":"Tâche non trouvée"}, 400
         return task.to_dict()
-    
+
     def put(self, task_id):
+        """
+        Mets à jour une tâche par son id
+        Args:
+            self : la classe TaskResource
+            task_id : int : l'id de la tâche
+        Return:
+            dict : message d'erreur
+            task : dict : une tâche
+        """
         data = self.rebuild_params()
         task = update_task(session=session, id=task_id, **data)
-        if(not task):
+        if not task:
             return {"message":"Tâche non trouvée"}, 400
         return task.to_dict()
 
     def delete(self, task_id):
+        """
+        Supprimer une tâche par son id
+        Args:
+            self : la classe TaskResource
+            task_id : int : l'id de la tâche
+        Return:
+            dict : message d'erreur
+            dict : message de réussite
+        """
         delete_id = delete_task(session=session, id=task_id)
-        if(not delete_id):
+        if not delete_id:
             return {"message":"Problème de suppression"}, 400
         return {"message":f"Tâche {delete_id} supprimée"}
 

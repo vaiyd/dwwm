@@ -10,7 +10,7 @@ def get():
 
 def post():
     res = requests.post(url="http://127.0.0.1:5001/tasks",
-                        json={"title":"title7", "description":"dc7"})
+                        json={"title":"title8", "description":"dc8"})
     dict_res = res.json()
     print(dict_res)
 
@@ -27,7 +27,7 @@ def delete():
     print(dict_res)
 
 def main():
-    post()
+    delete()
 
 if __name__ == '__main__':
     main()
