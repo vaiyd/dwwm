@@ -20,7 +20,7 @@ def sql_main():
     req = text("""SELECT * FROM marque_lookup""")
     
     res = session.execute(req).all()
-
+    #test sonar
     print(res)
 
 def buildTables():
