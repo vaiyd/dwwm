@@ -38,11 +38,15 @@ class Task(Base):
                  "description":self.description, "completed":self.completed})
 
 def session_commit(session):
+    b_return = False
     try:
         session.commit()
+        b_return = True
     except Exception as e:
         print(f"Une erreur est surevenue :: {e}")
         session.rollback()
+
+    return b_return
 
 def get_task_from_id(session, id):
     task = session.query(Task).filter_by(**{"id":id}).first()
@@ -53,9 +57,11 @@ def get_all_tasks(session):
     return tasks
 
 def create_task(session, **kwargs):
+    b_return = False
     new_task = Task(**kwargs)
     session.add(new_task)
-    session_commit(session=session)
+    b_return = session_commit(session=session)
+    return b_return
 
 def update_task(session, id, title=None,description=None, completed=None):
     task = get_task_from_id(session=session, id=id)

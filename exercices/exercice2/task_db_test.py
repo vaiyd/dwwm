@@ -10,9 +10,12 @@ class TestDatabase(unittest.TestCase):
         self.engine =create_engine('sqlite:///:memory:')
         self.session = Session(bind=self.engine)
         Base.metadata.create_all(self.engine)
-                          
+
+    def test_create_task(self):
+        self.assertEqual(create_task(session=self.session, title="title1", description="dc1"), True)
+
     def test_create_get_task(self):
-        create_task(session=self.session, title="title1", description="dc1")
+        self.assertEqual(create_task(session=self.session, title="title1", description="dc1"), True)
         task = get_task_from_id(session=self.session, id=1)
 
         self.assertIsNotNone(task)
